@@ -34,7 +34,7 @@ func GeneratePagesAsync(assets []string, count int) {
 		}()
 	}
 
-	for i := 0; i < count; i++ {
+	for i := 1; i < count; i++ {
 		<-c
 	}
 }
