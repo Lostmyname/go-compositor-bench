@@ -27,14 +27,14 @@ func GeneratePage(assets []string, page int) {
 func GeneratePagesAsync(assets []string, count int) {
 	c := make(chan int, NCPU)
 
-	for i := 1; i < count; i++ {
-		go func() {
-			GeneratePage(assets, i)
+	for i := 0; i < count; i++ {
+		go func(page int) {
+			GeneratePage(assets, page)
 			c <- 1
-		}()
+		}(i+1)
 	}
 
-	for i := 1; i < count; i++ {
+	for i := 0; i < count; i++ {
 		<-c
 	}
 }
